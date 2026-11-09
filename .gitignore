@@ -1,0 +1,23 @@
+# Build e cache
+.gradle/
+build/
+.kotlin/
+.idea/
+*.iml
+.vscode/
+
+# Segredos e configuração local (NUNCA subir)
+local.properties
+keystore.properties
+*.jks
+*.keystore
+
+# APKs: vão em Releases do GitHub, não no repositório
+*.apk
+*.aab
+
+# Dados do carro/celular puxados do aparelho (logs com VIN, rastreio BLE)
+pulled*/
+
+# Rascunhos de ícone (o ícone final já está em app/src/main/res)
+icon-options/
