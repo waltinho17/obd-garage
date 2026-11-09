@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/icon.svg" alt="Ícone do OBD Garage" width="120">
+
 # OBD Garage
 
 **Painel digital para Android que lê o OBD-II do carro e mostra tudo em dashes grandes, feitos para ler de longe.**
