@@ -171,6 +171,7 @@ fun DashScreen(
                     color = if (vehicleName.isEmpty()) DashColors.TextSecondary else DashColors.Steel,
                     fontWeight = FontWeight.Bold, minSize = 11.sp,
                 )
+                if (values["ethanol"] != null) EthanolChip(values["ethanol"])
                 FitText(
                     statusLine, 15.sp, Modifier.weight(1.6f),
                     color = DashColors.TextSecondary, textAlign = TextAlign.End, minSize = 10.sp,

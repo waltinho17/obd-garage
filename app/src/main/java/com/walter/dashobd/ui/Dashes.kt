@@ -163,7 +163,6 @@ private fun TurboDash(d: DashData) {
                     ),
                 )
             }
-            if (d.has(Sensors.ethanol)) EthanolStrip(v["ethanol"], Modifier.fillMaxWidth().height(if (landscape) 66.dp else 92.dp))
             if (landscape) {
                 Row(Modifier.weight(1f).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(gap)) {
                     hero(Modifier.weight(1.3f).fillMaxHeight())
@@ -178,56 +177,6 @@ private fun TurboDash(d: DashData) {
 }
 
 
-/**
- * Teor de etanol no combustível, lido da ECU (PID 52) e logo abaixo da barra de rpm no dash Turbo, para ver de
- * relance a mistura ANTES de puxar: número, barra de 0 a 100% com marcas em E30 (gasolina do posto), E50 e E85,
- * e o nome da mistura ("E50") com a fração de gasolina. A ECU estima o teor depois do abastecimento, então o valor
- * leva alguns minutos rodando para assentar.
- */
-@Composable
-private fun EthanolStrip(value: Double?, modifier: Modifier = Modifier) {
-    val sensor = Sensors.ethanol
-    val fraction by androidx.compose.animation.core.animateFloatAsState(sensor.fraction(value), androidx.compose.animation.core.tween(300), label = "ethanol")
-    BoxWithConstraints(modifier) {
-        LabeledCard(sensor.fullLabel(), 16.sp, Modifier.fillMaxSize()) {
-            BoxWithConstraints(Modifier.fillMaxSize()) {
-                val vh = maxHeight.value
-                val valueSize = (vh * 0.85f).coerceIn(20f, 64f).sp
-                val barH = (vh * 0.5f).coerceIn(12f, 28f).dp
-                val track = DashColors.Track
-                val accent = DashColors.Accent
-                val tick = DashColors.TextPrimary
-                Row(Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    FitText(
-                        sensor.format(value) + " %", valueSize, Modifier.weight(1f),
-                        color = DashColors.TextPrimary, fontWeight = FontWeight.Bold,
-                    )
-                    androidx.compose.foundation.Canvas(Modifier.weight(1.3f).height(barH)) {
-                        val r = androidx.compose.ui.geometry.CornerRadius(size.height / 2)
-                        drawRoundRect(track, size = size, cornerRadius = r)
-                        if (fraction > 0.003f) {
-                            drawRoundRect(accent, size = androidx.compose.ui.geometry.Size(size.width * fraction, size.height), cornerRadius = r)
-                        }
-                        for (mark in listOf(0.30f, 0.50f, 0.85f)) {
-                            val x = size.width * mark
-                            drawLine(tick.copy(alpha = 0.75f), Offset(x, 0f), Offset(x, size.height), strokeWidth = 2.dp.toPx())
-                        }
-                    }
-                    Column(Modifier.weight(0.8f), horizontalAlignment = Alignment.End) {
-                        FitText(
-                            Sensors.ethanolName(value) ?: "--", (vh * 0.55f).coerceIn(18f, 40f).sp, Modifier.fillMaxWidth(),
-                            color = DashColors.Accent, fontWeight = FontWeight.Bold, textAlign = TextAlign.End,
-                        )
-                        FitText(
-                            Sensors.gasolinePercent(value)?.let { "$it% gasolina" } ?: "sem leitura", (vh * 0.3f).coerceIn(12f, 18f).sp,
-                            Modifier.fillMaxWidth(), color = DashColors.TextSecondary, textAlign = TextAlign.End,
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
 /**
  * Pressão do turbo atual e, ao lado (ou abaixo, em retrato), o bloco de pico com o RPM em que ocorreu.
  * Toque no valor troca a unidade (bar, kgf/cm², psi, kPa). O número é a pressão RELATIVA: quanto o turbo
@@ -396,6 +345,32 @@ private fun DataDash(d: DashData) {
                 chart(Modifier.weight(1f).fillMaxWidth())
                 CardGrid(grid, v, 2, Modifier.weight(1.5f).fillMaxWidth(), showBar = true)
             }
+        }
+    }
+}
+
+/**
+ * Indicador mínimo do teor de etanol, para o rodapé: "E50" em destaque, o percentual e uma barrinha fina com marcas
+ * em E30/E50/E85. Valor da ECU (PID 52); só aparece se o carro informa.
+ */
+@Composable
+fun EthanolChip(value: Double?, modifier: Modifier = Modifier) {
+    val sensor = Sensors.ethanol
+    val fraction by androidx.compose.animation.core.animateFloatAsState(sensor.fraction(value), androidx.compose.animation.core.tween(300), label = "ethanol")
+    val track = DashColors.Track
+    val accent = DashColors.Accent
+    val tick = DashColors.TextSecondary
+    Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("ETANOL", fontSize = 13.sp, color = DashColors.TextSecondary, maxLines = 1, softWrap = false)
+        Text(
+            Sensors.ethanolName(value) ?: "--", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = DashColors.TextPrimary,
+            maxLines = 1, softWrap = false,
+        )
+        androidx.compose.foundation.Canvas(Modifier.width(56.dp).height(8.dp)) {
+            val r = androidx.compose.ui.geometry.CornerRadius(size.height / 2)
+            drawRoundRect(track, size = size, cornerRadius = r)
+            if (fraction > 0.003f) drawRoundRect(accent, size = androidx.compose.ui.geometry.Size(size.width * fraction, size.height), cornerRadius = r)
+            for (mark in listOf(0.30f, 0.50f, 0.85f)) drawLine(tick, Offset(size.width * mark, 0f), Offset(size.width * mark, size.height), strokeWidth = 1.dp.toPx())
         }
     }
 }
