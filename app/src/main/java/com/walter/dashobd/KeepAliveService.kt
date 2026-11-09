@@ -35,7 +35,7 @@ class KeepAliveService : Service() {
         )
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
-            .setContentTitle("Dash OBD conectado")
+            .setContentTitle("OBD Garage conectado")
             .setContentText("Lendo o carro. Toque para abrir.")
             .setContentIntent(open)
             .setOngoing(true)

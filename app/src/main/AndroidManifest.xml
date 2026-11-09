@@ -24,7 +24,7 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:label="Dash OBD"
+        android:label="OBD Garage"
         android:theme="@style/Theme.DashObd">
         <activity
             android:name=".MainActivity"

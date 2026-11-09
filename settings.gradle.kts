@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "dash-obd"
+rootProject.name = "obd-garage"
 include(":app")

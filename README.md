@@ -1,4 +1,4 @@
-# Dash OBD
+# OBD Garage
 
 Painel digital para Android que lê dados do motor pelo OBD-II (adaptador ELM327 Bluetooth LE, testado com o Vgate iCar Pro) e mostra em dashes grandes, feitos para ler de longe com o celular parado no painel. Projeto pessoal, pensado para um VW Polo TSI (MQB), mas funciona com qualquer carro que fale OBD-II padrão.
 
@@ -8,7 +8,7 @@ Painel digital para Android que lê dados do motor pelo OBD-II (adaptador ELM327
 
 - **4 dashes:** Esporte, Turbo, Painel e Dados (gráfico dos últimos 60 s).
 - **Pressão do turbo** relativa, com pico retido e RPM do pico; unidade em bar, kgf/cm², psi ou kPa.
-- **Teor de etanol** (PID 52) em faixa própria no dash Turbo: porcentagem, barra com marcas em E30/E50/E85 e nome da mistura (E50). A ECU estima o teor depois do abastecimento, então ele leva alguns minutos de uso para assentar.
+- **Teor de etanol** (PID 52) no rodapé de todos os dashes: nome da mistura (E50) e uma barra fina com marcas em E30, E50 e E85. A ECU estima o teor depois do abastecimento, então ele leva alguns minutos de uso para assentar.
 - **Log** de sessões em CSV com hora precisa, detecção de pulls, mín/máx e gráfico estilo dinamômetro.
 - Detecta turbo x aspirado, nome do carro pelo VIN, temas claro/escuro, tamanho de texto e orientação ajustáveis.
 - Leitura continua com a tela apagada (serviço em primeiro plano).

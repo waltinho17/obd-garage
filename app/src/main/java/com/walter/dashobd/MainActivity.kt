@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
     /**
      * Atalho de desenvolvimento, só em build debug, para conferir telas sem tocar no aparelho:
-     * `adb shell am start -n com.walter.dashobd/.MainActivity --ez autoconnect true --ei page 1 --ei record 16 --ei logtab 1 --ez openlist true`
+     * `adb shell am start -n com.walter.obdgarage/com.walter.dashobd.MainActivity --ez autoconnect true --ei page 1 --ei record 16 --ei logtab 1 --ez openlist true`
      */
     private fun runDebugScript() {
         if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return

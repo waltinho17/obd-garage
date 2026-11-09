@@ -94,7 +94,7 @@ fun ConnectionScreen(
         val btnH = if (landscape) ((maxHeight - pad * 2 - gap * (buttonCount - 1)) / buttonCount).coerceIn(48.dp, BigButtonHeight) else BigButtonHeight
 
         val header: @Composable ColumnScope.() -> Unit = {
-            Text("Dash OBD", fontSize = titleSize, fontWeight = FontWeight.Bold, color = DashColors.TextPrimary)
+            Text("OBD Garage", fontSize = titleSize, fontWeight = FontWeight.Bold, color = DashColors.TextPrimary)
             Text("Só leitura · não escreve nada no carro", color = DashColors.TextSecondary, fontSize = 18.sp, textAlign = TextAlign.Center)
             StatusArea(state, permissionDenied, onDismissError)
         }

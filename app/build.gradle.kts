@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.walter.dashobd"
+        applicationId = "com.walter.obdgarage"
         minSdk = 26
         targetSdk = 34
         versionCode = 2
