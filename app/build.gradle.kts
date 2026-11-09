@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.walter.dashobd"
+    namespace = "com.walter.obdgarage"
     compileSdk = 34
 
     defaultConfig {

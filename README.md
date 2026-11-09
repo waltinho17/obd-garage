@@ -31,9 +31,9 @@ Saída: `app/build/outputs/apk/<debug|release>/`.
 Crie um `keystore.properties` na raiz (ele **não** vai para o git):
 
 ```properties
-storeFile=C:/caminho/para/dashobd-release.jks
+storeFile=C:/caminho/para/obd-garage-release.jks
 storePassword=...
-keyAlias=dashobd
+keyAlias=obdgarage
 keyPassword=...
 ```
 
@@ -51,7 +51,7 @@ Baixe o APK em **Releases**, copie para o celular e instale (permitir instalaç�
 ## Estrutura
 
 ```
-app/src/main/java/com/walter/dashobd/
+app/src/main/java/com/walter/obdgarage/
   obd/   protocolo ELM327, sensores, agendador de leitura, simulador
   ble/   busca e conexão Bluetooth LE
   log/   gravação, CSV, pulls, estatísticas

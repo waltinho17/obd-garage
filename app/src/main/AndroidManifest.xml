@@ -25,7 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="OBD Garage"
-        android:theme="@style/Theme.DashObd">
+        android:theme="@style/Theme.ObdGarage">
         <activity
             android:name=".MainActivity"
             android:exported="true"
