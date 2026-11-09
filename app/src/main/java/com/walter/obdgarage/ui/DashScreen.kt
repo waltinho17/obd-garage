@@ -160,6 +160,9 @@ fun DashScreen(
             }
 
             // Rodapé: nome do carro (toque para editar) e estado da leitura.
+            // Em tela estreita (retrato) o estado da leitura sai: o nome do carro e o etanol têm prioridade.
+            BoxWithConstraints(Modifier.fillMaxWidth()) {
+            val narrow = maxWidth < 520.dp
             Row(
                 Modifier.fillMaxWidth().padding(horizontal = 10.dp, vertical = 3.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -172,10 +175,11 @@ fun DashScreen(
                     fontWeight = FontWeight.Bold, minSize = 11.sp,
                 )
                 if (values["ethanol"] != null) EthanolChip(values["ethanol"])
-                FitText(
+                if (!narrow) FitText(
                     statusLine, 15.sp, Modifier.weight(1.6f),
                     color = DashColors.TextSecondary, textAlign = TextAlign.End, minSize = 10.sp,
                 )
+            }
             }
         }
     }
